@@ -8,31 +8,35 @@ interface RegisterServiceParams {
     password: string
 }
 
-export async function registerUseCase({
-    name,
-    email,
-    password
-}: RegisterServiceParams) {
-    const password_hash = await hash(password, 2)
+export class RegisterUseCase {
+    constructor(private usersRepository: any) { }
 
-    const userWithSameEmail = await prisma.user.findUnique({
-        where: {
-            email
+    async execute({
+        name,
+        email,
+        password
+    }: RegisterServiceParams) {
+        const password_hash = await hash(password, 2)
+
+        const userWithSameEmail = await prisma.user.findUnique({
+            where: {
+                email
+            }
+        })
+
+        if (userWithSameEmail) {
+            throw new Error('This amail its already linked to another count')
         }
-    })
 
-    if (userWithSameEmail) {
-        throw new Error('This amail its already linked to another count')
+        await this.usersRepository.create(
+            {
+                name,
+                email,
+                password_hash
+            }
+        )
+
     }
 
-    const prismaUsersRepository = new PrismaUsersRepositorie()
-
-    prismaUsersRepository.create(
-        {
-            name,
-            email,
-            password_hash
-        }
-    )
-
 }
+
