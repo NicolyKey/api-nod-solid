@@ -1,0 +1,12 @@
+version: '2.31'
+
+services:
+   api-teste: 
+     image: bitnami/postgresql,
+     ports: 
+       - 5433:5432
+     enviroment:
+        - POSTGRESQL_USERNAME=postgres
+        - POSTGRESQL_PASSWORD=123
+        - POSTGRESQL_DATABASE=my_db
+        
