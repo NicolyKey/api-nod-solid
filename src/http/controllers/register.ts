@@ -1,10 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
-import { hash } from 'bcryptjs'
-import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { RegisterUseCase } from '@/services/register'
-import { Prisma } from '@prisma/client'
-import { PrismaUsersRepositorie } from '@/repositories/prisma-users-repositories'
+import { PrismaUsersRepositorie } from '@/repositories/prisma/prisma-users-repositories'
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {
     const registerBodySchema = z.object({
