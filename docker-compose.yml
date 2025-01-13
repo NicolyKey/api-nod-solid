@@ -1,12 +1,12 @@
-version: '2.31'
+#dcker-compose up -d
+version: '3.8'
 
 services:
-   api-teste: 
-     image: bitnami/postgresql,
-     ports: 
-       - 5433:5432
-     enviroment:
-        - POSTGRESQL_USERNAME=postgres
-        - POSTGRESQL_PASSWORD=123
-        - POSTGRESQL_DATABASE=my_db
-        
+  api-teste:
+    image: bitnami/postgresql
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRESQL_USERNAME: postgres
+      POSTGRESQL_PASSWORD: 123
+      POSTGRESQL_DATABASE: my_db
